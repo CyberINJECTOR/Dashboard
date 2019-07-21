@@ -1,0 +1,58 @@
+.add-pop-up {
+    border:1px solid grey;
+}
+
+.notes-panel,.task-panel {
+    margin-top: 3rem;
+    margin-left: 1rem;
+    height: auto;
+    // background: #202940;
+    background: #202940;
+    border-radius: 5px 5px 5px 5px;
+    padding-bottom: 3rem;
+
+    h3 {
+        position: absolute;
+        margin-top: -3rem;
+        width: 25rem;
+        background: #D500F9;
+        color: white;
+        height: 5rem;
+        border-radius: 5px 5px 5px 5px;
+    }
+
+    .body-notes,.task-notes {
+        margin-top: 2rem;
+        .list-group-item {
+            border-radius: 5px 5px 5px 5px;
+            // background: #1f283e;
+            background: transparent;
+            opacity: 0.9;
+            margin-top: 3rem;
+            border:none;
+            border-bottom: 1px solid grey;
+            .note-icon  {
+                color: #D500F9;
+                cursor: pointer;
+            }
+            label {
+                position: absolute;
+                padding-top: 0.4rem;
+                color: white;
+            }
+            .edit-icon {
+                position: relative;
+                float: right;
+                color: #D500F9;
+                cursor: pointer;
+            }
+            .delete-icon {
+                position: relative;
+                float: right;
+                color: #D500F9;
+                cursor: pointer;
+            }
+        }
+    }
+}
+

@@ -1,0 +1,43 @@
+.profile-panel {
+    margin-top: 3rem;
+    margin-left: 1rem;
+    height: auto;
+    // background: #202940;
+    background: #202940;
+    border-radius: 5px 5px 5px 5px;
+    padding-bottom: 3rem;
+
+    img {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 3rem;
+        margin-left: 6rem;
+        margin-top: -3rem;
+    }
+
+    .role {
+        color: white;
+        margin: 1rem 4rem;
+    }
+    .name {
+        color: white;
+        margin-left: 4.5rem;
+    }
+    .description {
+        color:white;
+
+    }
+
+    .follow {
+        right: 1rem;
+        float: right;
+        margin-top: 0.1rem;
+        color: grey;
+        border:2px solid #D500F9;
+        background: transparent;
+    
+        &:hover {
+            background: transparent;
+        }
+    }
+}

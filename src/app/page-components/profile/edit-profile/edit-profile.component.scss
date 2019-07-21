@@ -1,0 +1,46 @@
+.profile-panel {
+    margin-top: 3rem;
+    margin-left: 1rem;
+    height: auto;
+    // background: #202940;
+    background: #202940;
+    border-radius: 5px 5px 5px 5px;
+    padding-bottom: 3rem;
+
+    h3 {
+        position: absolute;
+        margin-top: -3rem;
+        width: 34rem;
+        background: #D500F9;
+        color: white;
+        height: 5rem;
+        border-radius: 5px 5px 5px 5px;
+    }
+
+    .input-container {
+        margin-top: 3rem;
+
+        .form-input {
+            color: white;
+            
+        }
+    }
+
+    .update-profile {
+        right: 1rem;
+        margin-top: 0.1rem;
+        color: grey;
+        border:2px solid #D500F9;
+        background: transparent;
+        position: absolute;
+    
+        &:hover {
+            background: transparent;
+        }
+    }   
+}
+
+mat-placeholder {
+    color: #D500F9;
+}
+  

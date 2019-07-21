@@ -1,0 +1,40 @@
+<div class="main-home">
+    <div class="add-pop-up col-xl-4" *ngIf="false">
+        <app-add-popup-task></app-add-popup-task>
+    </div>
+    <div class="row">
+        <div class="notes-panel d-inline col-xl-5">
+            <mat-list>
+                <h3 mat-subheader>Notes</h3>
+                <ul class="list-group list-group-vertical-lg">
+                  <mat-list-item class="body-notes" *ngFor="let folder of folders">
+                      <li class="list-group-item col-xl-12">
+                          <mat-icon class="note-icon col-xl-2" mat-list-icon>note</mat-icon>
+                          <label class="d-inline col-xl-9">{{folder.name}}</label>
+                          <mat-icon class="edit-icon d-inline col-xl-1" mat-list-icon>edit</mat-icon>
+                          <mat-icon class="delete-icon d-inline col-xl-1" mat-list-icon>delete_forever</mat-icon>
+                          <p mat-line> {{folder.updated | date}}</p>
+                      </li>         
+                  </mat-list-item>
+              </ul>
+            </mat-list>
+        </div>
+        <div class="task-panel d-inline col-xl-5">
+            <mat-list>
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Task</h3>
+                <ul class="list-group list-group-vertical-lg">
+                    <mat-list-item class="body-notes" *ngFor="let note of notes">
+                        <li class="list-group-item col-xl-12">
+                            <mat-icon class="note-icon col-xl-2" mat-list-icon>note</mat-icon>
+                            <label class="d-inline col-xl-9">{{note.name}}</label>
+                            <mat-icon class="edit-icon d-inline col-xl-1" mat-list-icon>edit</mat-icon>
+                            <mat-icon class="delete-icon d-inline col-xl-1" mat-list-icon>delete_forever</mat-icon>
+                            <p mat-line> {{note.updated | date}}</p>
+                        </li>         
+                    </mat-list-item>
+                </ul>
+            </mat-list>
+        </div>
+    </div>
+</div>

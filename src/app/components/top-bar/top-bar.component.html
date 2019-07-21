@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="open-side-bar col-xl-3">
+    <button mat-icon-button aria-label="Example icon-button with a menu">
+      <mat-icon class="three-thods">more_vert</mat-icon>
+    </button>
+    <button mat-raised-button (click)="openDialog()" class="add-task-note">Add</button>
+  </div>
+
+  <ul class="list-group list-group-horizontal-lg col-xl-3  offset-xl-6">
+    <li class="list-group-item">
+      <button mat-menu-item [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon class="notification-button">notification_important</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Redial</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>voicemail</mat-icon>
+          <span>Check voice mail</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+      </mat-menu>
+    </li>
+    <li class="list-group-item">
+      <mat-icon class="apps-icon">apps</mat-icon>
+    </li>
+    <li class="list-group-item">
+      <mat-icon class="perfil-icon">
+        <img matListAvatar src="../../../assets/img/perfil2.jpg" alt="...">
+      </mat-icon>
+    </li>
+  </ul>
+</div>
