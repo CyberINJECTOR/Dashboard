@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Event } from '../../page-components/evento/event';
 import { EventColums } from '../../models/event-colums';
 import { StateService } from 'src/app/services/state.service';
-import { localStorageVariables } from 'src/app/models/local-storage';
+import { LocalStorageVariables } from 'src/app/models/local-storage';
 
 @Component({
   selector: 'app-evento',
@@ -13,19 +13,18 @@ import { localStorageVariables } from 'src/app/models/local-storage';
 })
 
 export class EventoComponent implements OnInit {
-  displayedColumns = ['id','img_url', 'description','id_EventType', 'created_ad', 'updated_ad', 'edit', 'delete'];
-  titles = ['id', 'description', 'img_url','id_EventType', 'created_ad', 'updated_ad'];
+  displayedColumns = ['id', 'img_url', 'description', 'id_EventType', 'created_ad', 'updated_ad', 'edit', 'delete'];
+  titles = ['id', 'description', 'img_url', 'id_EventType', 'created_ad', 'updated_ad'];
   dataSource = ELEMENT_DATA;
   eventsArrayList: Event[];
   eventColumns: EventColums;
 
-  constructor(private _stateService: StateService, private _httpCall: HttpCallService) {
-    this._httpCall.getAllEvents('getAllEvents').subscribe((res: Event[]) =>
-    {
+  constructor(private stateService: StateService, private httpCall: HttpCallService) {
+    this.httpCall.getAllEvents('getAllEvents').subscribe((res: Event[]) => {
       this.eventsArrayList = res;
     });
 
-    const selectedTab = this._stateService.getItem(localStorageVariables.selectedTab)
+    const selectedTab = this.stateService.getItem(LocalStorageVariables.selectedTab);
   }
 
 

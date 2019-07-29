@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { StateService } from 'src/app/services/state.service';
-import { localStorageVariables } from 'src/app/models/local-storage';
+import { LocalStorageVariables } from 'src/app/models/local-storage';
 
 export interface Section {
   name: string;
@@ -46,7 +46,7 @@ export class SidebarComponent implements OnInit {
   }
 
   navigate(event: string) {
-    this.state.addItem(localStorageVariables.selectedTab, event);
+    this.state.addItem(LocalStorageVariables.selectedTab, event);
     this.changeEvent.emit(event);
     this.selectedTab = event;
   }

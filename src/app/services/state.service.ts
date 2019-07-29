@@ -1,20 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Route, ActivatedRoute, ParamMap, Router, Params, RoutesRecognized } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { localStorageVariables } from '../models/local-storage';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
+import { LocalStorageVariables } from '../models/local-storage';
 import { ModelUtils } from '../models/Model-utils';
-import { EventEmitter } from '@angular/core';
-import { filter, map } from 'rxjs/operators';
-
-export interface IStateEvent {
-  key: string;
-  value: string;
-}
+import { filter, map, switchMap } from 'rxjs/operators';
+import { StateEntity } from './Entities/StateEntity';
 
 @Injectable()
 export class StateService {
-  private itemSetEvent: EventEmitter<any> = new EventEmitter<any>();
-
+  private itemSetEvent: Subject<any> = new BehaviorSubject<any>(null);
+  stateEntity: StateEntity = null;
   constructor(private route: Router, private router: ActivatedRoute) {
 
   }
@@ -25,14 +20,15 @@ export class StateService {
         const selectedTab = val.state.url;
         const formatChange = ModelUtils.DeleteCharacter(selectedTab, 1);
         const selectedTabToStore = ModelUtils.ConvertToUpperCase(formatChange);
-        this.addItem(localStorageVariables.selectedTab, selectedTabToStore);
+        this.addItem(LocalStorageVariables.selectedTab, selectedTabToStore);
       }
     });
   }
 
-  public addItem(key: string, value: string) {
-    localStorage.setItem(key, value);
-    this.itemSetEvent.emit( { id: key, description: value });
+  public addItem(keyType: string, valueType: string) {
+    localStorage.setItem(keyType, valueType);
+    this.itemSetEvent.next({ key: keyType, value: valueType });
+    // console.log(this.itemSetEvent);
   }
 
   public deleteItem(key: string) {
@@ -43,10 +39,21 @@ export class StateService {
     return localStorage.getItem(key);
   }
 
-  public getObservableItem<T>(key: string): Observable<T> {
+  // public getObservableItems<T>(key: string): Observable<T> {
+  //   return this.itemSetEvent.asObservable().pipe(
+  //     filter((label: IStateEvent) => label.value === key),
+  //     map((label: IStateEvent) => label.key as unknown as T)
+  //   );
+  // }
+
+
+  public getObservableValue<T>(key: any): Observable<any> {
     return this.itemSetEvent.asObservable().pipe(
-      filter((label: IStateEvent) => label.value === key),
-      map((label: IStateEvent) => label.key as unknown as T)
+     switchMap((tab: any) => this.getObs(tab))
     );
+  }
+
+  private getObs(key: any): Observable<any> {
+    return (key) ? of(key.value) : of();
   }
 }

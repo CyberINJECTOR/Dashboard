@@ -1,3 +1,3 @@
-export class localStorageVariables {
-    static readonly selectedTab = "selectedTab";
+export class LocalStorageVariables {
+    static readonly selectedTab = 'selectedTab';
 }

@@ -1,4 +1,3 @@
-
 <div class="top-bar position-absolute offset-xl-3 col-xl-9">
   <app-top-bar></app-top-bar>
 </div>
@@ -8,9 +7,9 @@
   </app-sidebar>
 </div>
 
-
-
 <div class="main  position-relative col-xl-9">
-    <router-outlet></router-outlet>
+  <div class="universal-toolbar col-xl-2">
+    <app-universal-toolbar (changeEvent)="changeEventCalled($event)"></app-universal-toolbar>
+  </div>
+  <router-outlet></router-outlet>
 </div>
-
