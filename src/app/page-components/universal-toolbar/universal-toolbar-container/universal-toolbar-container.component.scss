@@ -1,0 +1,39 @@
+.universal-toolbar-container {
+    .row {
+        p {
+            color: white;
+        }
+    
+        button {
+            float: left;
+            padding-left: 1rem;
+            height: 2.5rem;
+            .icon {
+                padding: 0;
+            }
+    
+            label {
+                margin-top: 0.5rem;
+                padding-left: 0.2rem;
+                font-size: 0.8rem;
+            }
+        }
+    
+    }
+   
+    .row {
+        .example-section {
+            margin: 0.5rem;
+            padding-left: 0.7rem;
+            .example-margin-one, .example-margin {
+                height: 2rem;
+            }
+
+            label {
+                color: white;
+                font-size: 0.8rem;
+                margin-top: 0.5rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+<div class="universal-toolbar-container">
+  <div class="row">
+    <p>{{selectedTab}}</p>
+    <button mat-button color="warn" (click)="openDialog()">
+      <mat-icon class="icon">add</mat-icon>
+      <label>Add {{selectedTab}}</label>
+    </button>
+    <button mat-button color="warn">
+      <mat-icon class="icon">edit</mat-icon>
+      <label>Edit {{selectedTab}}</label>
+    </button>
+    <button mat-button color="warn">
+      <mat-icon class="icon">delete</mat-icon>
+      <label>Delete {{selectedTab}}</label>
+    </button>
+    <button mat-button color="warn">
+      <mat-icon class="icon">find_in_page</mat-icon>
+      <label>Find {{selectedTab}}</label>
+    </button>
+  </div>
+
+  <div class="row">
+    <section class="d-flex flex-column example-section" *ngIf="selectedTab === 'Task & Notes'">
+      <mat-checkbox class="example-margin-one"><label>Only Tast</label></mat-checkbox>
+      <mat-checkbox class="example-margin"><label>Only Notes</label></mat-checkbox>
+    </section>
+  </div>
+
+
+</div>
