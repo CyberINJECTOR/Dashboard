@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule, MatToolbarModule, MatIconModule, MatButtonModule, MatDialogModule,
          MatMenuModule, MatListModule, MatExpansionModule, MatInputModule, MatCheckboxModule,
-         MatChipsModule, MatTableModule} from '@angular/material';
+         MatChipsModule, MatTableModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,9 @@ import { ProfileCardComponent } from './page-components/profile/profile-card/pro
 import { HttpClientModule } from '@angular/common/http';
 import { UniversalToolbarComponent } from './page-components/universal-toolbar/universal-toolbar.component'
 import { StateService } from './services/state.service';
-import { HttpCallService } from './services/http-call.service'
+import { HttpCallService } from './services/http-call.service';
+import { UniversalToolbarContainerComponent } from './page-components/universal-toolbar/universal-toolbar-container/universal-toolbar-container.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +37,7 @@ import { HttpCallService } from './services/http-call.service'
     EditProfileComponent,
     ProfileCardComponent,
     UniversalToolbarComponent,
+    UniversalToolbarContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import { HttpCallService } from './services/http-call.service'
     MatChipsModule,
     MatDialogModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule
   ],
   providers: [StateService, HttpCallService, SidebarComponent],
   entryComponents: [AddPopupTaskComponent],

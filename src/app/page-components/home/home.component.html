@@ -3,17 +3,17 @@
         <app-add-popup-task></app-add-popup-task>
     </div>
     <div class="row">
-        <div class="notes-panel d-inline col-xl-5">
+        <div class="notes-panel d-inline col-xl-6">
             <mat-list>
                 <h3 mat-subheader>Notes</h3>
                 <ul class="list-group list-group-vertical-lg">
-                  <mat-list-item class="body-notes" *ngFor="let folder of folders">
+                  <mat-list-item class="body-notes" *ngFor="let note of noteArrayList">
                       <li class="list-group-item col-xl-12">
                           <mat-icon class="note-icon col-xl-2" mat-list-icon>note</mat-icon>
-                          <label class="d-inline col-xl-9">{{folder.name}}</label>
+                          <label class="d-inline col-xl-9">{{note.value}}</label>
                           <mat-icon class="edit-icon d-inline col-xl-1" mat-list-icon>edit</mat-icon>
                           <mat-icon class="delete-icon d-inline col-xl-1" mat-list-icon>delete_forever</mat-icon>
-                          <p mat-line> {{folder.updated | date}}</p>
+                          <p mat-line> {{note.created_at | date}}</p>
                       </li>         
                   </mat-list-item>
               </ul>
@@ -24,13 +24,13 @@
                 <mat-divider></mat-divider>
                 <h3 mat-subheader>Task</h3>
                 <ul class="list-group list-group-vertical-lg">
-                    <mat-list-item class="body-notes" *ngFor="let note of notes">
+                    <mat-list-item class="body-notes" *ngFor="let task of taskArrayList">
                         <li class="list-group-item col-xl-12">
                             <mat-icon class="note-icon col-xl-2" mat-list-icon>note</mat-icon>
-                            <label class="d-inline col-xl-9">{{note.name}}</label>
+                            <label class="d-inline col-xl-9">{{task.value}}</label>
                             <mat-icon class="edit-icon d-inline col-xl-1" mat-list-icon>edit</mat-icon>
                             <mat-icon class="delete-icon d-inline col-xl-1" mat-list-icon>delete_forever</mat-icon>
-                            <p mat-line> {{note.updated | date}}</p>
+                            <p mat-line> {{task.created_at | date}}</p>
                         </li>         
                     </mat-list-item>
                 </ul>

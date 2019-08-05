@@ -9,7 +9,6 @@ import { AddPopupTaskComponent } from '../add-popup-task/add-popup-task.componen
 })
 export class TopBarComponent implements OnInit {
 
-  public component_name = "Home";
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {

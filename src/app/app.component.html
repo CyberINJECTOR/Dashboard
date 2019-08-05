@@ -1,15 +1,18 @@
-<div class="top-bar position-absolute offset-xl-3 col-xl-9">
+<div class="top-bar position-absolute offset-xl-2 col-xl-10">
   <app-top-bar></app-top-bar>
 </div>
 
-<div class="side-bar position-absolute col-xl-3">
+<div class="side-bar position-absolute col-xl-2">
   <app-sidebar>
   </app-sidebar>
 </div>
 
-<div class="main  position-relative col-xl-9">
-  <div class="universal-toolbar col-xl-2">
-    <app-universal-toolbar (changeEvent)="changeEventCalled($event)"></app-universal-toolbar>
+<div class="main  position-relative col-xl-10">
+  <button class="configuration-button" (click)="toggleUniversalToolBar()" mat-mini-fab  aria-label="Example icon-button with a heart icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div *ngIf="sideBarIsOpened" class="universal-toolbar col-xl-2">
+    <app-universal-toolbar></app-universal-toolbar>
   </div>
   <router-outlet></router-outlet>
 </div>

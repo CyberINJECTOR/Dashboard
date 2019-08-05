@@ -4,11 +4,12 @@ import { map, flatMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Event } from '../page-components/evento/event';
 import { EventColums } from '../models/event-colums';
+import { EntityInsertTasksAndNotes } from '../page-components/home/Entities/Entity-insert-model';
 
 @Injectable()
 export class HttpCallService {
 
-  const = 'http://127.0.0.1:8000/api/';
+  constUrl = 'http://127.0.0.1:8000/api/';
   eventsArrayList: Observable<Event[]>;
   eventColumns: Observable<EventColums[]>;
   constructor(private http: HttpClient) {
@@ -16,8 +17,8 @@ export class HttpCallService {
   }
 
 
-  public getAllEvents(method: string): Observable<Event[]> {
-    return this.http.get<Event[]>(this.const + method)
+  public getAllEvents(method: string): Observable<any[]> {
+    return this.http.get<Event[]>(this.constUrl + method)
       .pipe(
         map((response: any) => {
           JSON.stringify(response);
@@ -27,7 +28,7 @@ export class HttpCallService {
   }
 
   public getAllColums(method: string): Observable<EventColums> {
-    return this.http.get<EventColums[]>(this.const + method)
+    return this.http.get<EventColums[]>(this.constUrl + method)
       .pipe(
         map((response: any) => {
           JSON.stringify(response);
@@ -36,6 +37,11 @@ export class HttpCallService {
         }
         ));
 
+  }
+
+  public insert(method: string, request: EntityInsertTasksAndNotes,): boolean {
+    this.http.post(this.constUrl + method, request).subscribe(  data => console.log(data));
+    return true;
   }
 
 

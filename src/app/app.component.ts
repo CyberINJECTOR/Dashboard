@@ -7,11 +7,16 @@ import { StateService } from './services/state.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'admin';
+  sideBarIsOpened = true;
 
-  constructor(private state: StateService) {
+  constructor() {
    }
 
   ngOnInit() {
+  }
+
+  toggleUniversalToolBar() {
+    this.sideBarIsOpened = !this.sideBarIsOpened;
+    console.log(this.sideBarIsOpened);
   }
 }

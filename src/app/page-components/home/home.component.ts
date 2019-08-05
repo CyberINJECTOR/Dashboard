@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StateService } from 'src/app/services/state.service';
+import { HttpCallService } from 'src/app/services/http-call.service';
+import { Tasks } from './Entities/Task-model';
+import { Notes } from './Entities/Notes-model';
 
 export interface Section {
   name: string;
@@ -12,41 +14,18 @@ export interface Section {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  taskArrayList: Tasks[];
+  noteArrayList: Notes[];
 
-  folders: Section[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    }
-  ];
-  notes: Section[] = [
-    {
-      name: 'Vacation Itinerary',
-      updated: new Date('2/20/16'),
-    },
-    {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
-    }
-  ];
+  constructor(private httpCall: HttpCallService) {
+    this.httpCall.getAllEvents('getAllTasks').subscribe((res: Tasks[]) => {
+      this.taskArrayList = res;
+    });
 
-  constructor() { }
+    this.httpCall.getAllEvents('getAllNotes').subscribe((res: Notes[]) => {
+      this.noteArrayList = res;
+    });
+  }
 
   ngOnInit() {
 

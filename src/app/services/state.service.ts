@@ -26,9 +26,9 @@ export class StateService {
   }
 
   public addItem(keyType: string, valueType: string) {
-    localStorage.setItem(keyType, valueType);
-    this.itemSetEvent.next({ key: keyType, value: valueType });
-    // console.log(this.itemSetEvent);
+    const store = (valueType === 'Task_and_Notes') ? 'Task & Notes' : valueType;
+    localStorage.setItem(keyType, store);
+    this.itemSetEvent.next({ key: keyType, value: store });
   }
 
   public deleteItem(key: string) {
@@ -38,14 +38,6 @@ export class StateService {
   public getItem<T>(key: string) {
     return localStorage.getItem(key);
   }
-
-  // public getObservableItems<T>(key: string): Observable<T> {
-  //   return this.itemSetEvent.asObservable().pipe(
-  //     filter((label: IStateEvent) => label.value === key),
-  //     map((label: IStateEvent) => label.key as unknown as T)
-  //   );
-  // }
-
 
   public getObservableValue<T>(key: any): Observable<any> {
     return this.itemSetEvent.asObservable().pipe(

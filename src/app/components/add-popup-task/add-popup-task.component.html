@@ -1,10 +1,20 @@
 <div class="example-container">
-    <label for=""> Add Task & Note</label><br/><br/>
-    <mat-checkbox class="task d-inline">Task</mat-checkbox>
-    <mat-checkbox class="note d-inline">Note</mat-checkbox>
-    <mat-form-field>
-      <input matInput placeholder="Input">
-    </mat-form-field>
-    <button mat-button class="add-button">Add Task & Note </button>
+  <label for=""> Add Task & Note</label><br />
+  <div class="option-selector col-xl-12">
+    <mat-checkbox class="task d-inline" (click)="selectvalue('Task')">Task</mat-checkbox>
+    <mat-checkbox class="note d-inline" (click)="selectvalue('Note')">Note</mat-checkbox>
+  </div>
+
+  <mat-form-field class="example-full-width col-xl-12">
+    <textarea matInput 
+              placeholder="Add {{selectedValue}}" 
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="4"
+              [(ngModel)]="textArea">
+    </textarea>
+  </mat-form-field>
+  <br/>
+  <button mat-button class="add-button" (click)="AddEntity(selectedValue)">Add</button>
+  <button mat-button class="cancel-button">Cancel</button>
 </div>
-  

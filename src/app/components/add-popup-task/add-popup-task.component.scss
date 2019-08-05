@@ -1,19 +1,35 @@
-.task {
+.example-container {
 
-}
+    label {
+        padding-left: 1rem;
+    }
 
-.note {
-    margin-left: 2rem;
-}
+    .option-selector {
+        .note {
+            margin-left: 1rem;
+        }
+    }
 
-.add-button {
-    margin-left: 7rem;
-    color: grey;
-    border:2px solid #D500F9;
-    background: transparent;
+    .example-full-width {
+        top:1rem;
+    }
 
-    &:hover {
-        background: white;
+    .cancel-button {
+        right: 1rem;
+    }
+
+     .cancel-button, .add-button {
+        margin:0 auto;
+        color: grey;
+        border:2px solid #D500F9;
+        background: transparent;
+        float: right;
+        top: 0.5rem;
+        &:hover {
+            background: white;
+        }
     }
 }
+
+
 
