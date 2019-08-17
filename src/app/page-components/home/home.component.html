@@ -11,8 +11,8 @@
                       <li class="list-group-item col-xl-12">
                           <mat-icon class="note-icon col-xl-2" mat-list-icon>note</mat-icon>
                           <label class="d-inline col-xl-9">{{note.value}}</label>
-                          <mat-icon class="edit-icon d-inline col-xl-1" mat-list-icon>edit</mat-icon>
-                          <mat-icon class="delete-icon d-inline col-xl-1" mat-list-icon>delete_forever</mat-icon>
+                          <mat-icon class="edit-icon d-inline col-xl-1" (click)="EditEntity(note)" mat-list-icon matTooltip="Edit Note">edit</mat-icon>
+                          <mat-icon class="delete-icon d-inline col-xl-1"  (click)="DeleteEntity(note)"  matTooltip="Delete Note" mat-list-icon>delete_forever</mat-icon>
                           <p mat-line> {{note.created_at | date}}</p>
                       </li>         
                   </mat-list-item>
@@ -28,8 +28,8 @@
                         <li class="list-group-item col-xl-12">
                             <mat-icon class="note-icon col-xl-2" mat-list-icon>note</mat-icon>
                             <label class="d-inline col-xl-9">{{task.value}}</label>
-                            <mat-icon class="edit-icon d-inline col-xl-1" mat-list-icon>edit</mat-icon>
-                            <mat-icon class="delete-icon d-inline col-xl-1" mat-list-icon>delete_forever</mat-icon>
+                            <mat-icon class="edit-icon d-inline col-xl-1" (click)="EditEntity(task)" mat-list-icon matTooltip="Edit Task">edit</mat-icon>
+                            <mat-icon class="delete-icon d-inline col-xl-1"  (click)="DeleteEntity(note)" mat-list-icon matTooltip="Edit Task">delete_forever</mat-icon>
                             <p mat-line> {{task.created_at | date}}</p>
                         </li>         
                     </mat-list-item>

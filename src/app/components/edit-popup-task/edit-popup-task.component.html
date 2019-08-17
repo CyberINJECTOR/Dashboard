@@ -1,0 +1,17 @@
+<div class="example-container">
+  <label for=""> Edit {{newEntityToEdit.entity}}</label><br />
+  <div class="option-selector col-xl-12">
+    <mat-checkbox class="task d-inline" [checked]="checkedTask" (change)="isChecked()" (click)="selectvalue('Task')">
+      Task</mat-checkbox>
+    <mat-checkbox class="note d-inline" [checked]="checkedNote" (click)="selectvalue('Note')">Note</mat-checkbox>
+  </div>
+
+  <mat-form-field class="example-full-width col-xl-12">
+    <textarea matInput placeholder="Add {{selectedValue}}" cdkTextareaAutosize cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="4" [(ngModel)]="textArea">
+      </textarea>
+  </mat-form-field>
+  <br />
+  <button mat-button class="add-button" (click)="EditEntity(newEntityToEdit)">Add</button>
+  <button mat-button class="cancel-button" (click)="ClosePopUp()">Cancel</button>
+</div>

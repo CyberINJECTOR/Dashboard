@@ -21,7 +21,15 @@ export class UniversalToolbarContainerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log(result);
+    });
+
+    dialogRef.componentInstance.closeAddPopUp.subscribe(() => {
+      this.dialog.closeAll();
+    });
+
+    dialogRef.componentInstance.newEntitySaved.subscribe((result) => {
+      console.log(result);
     });
   }
 

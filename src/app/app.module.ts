@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule, MatToolbarModule, MatIconModule, MatButtonModule, MatDialogModule,
-         MatMenuModule, MatListModule, MatExpansionModule, MatInputModule, MatCheckboxModule,
+         MatMenuModule, MatListModule, MatExpansionModule, MatInputModule, MatCheckboxModule, MatTooltipModule,
          MatChipsModule, MatTableModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +22,8 @@ import { UniversalToolbarComponent } from './page-components/universal-toolbar/u
 import { StateService } from './services/state.service';
 import { HttpCallService } from './services/http-call.service';
 import { UniversalToolbarContainerComponent } from './page-components/universal-toolbar/universal-toolbar-container/universal-toolbar-container.component';
+import { EditPopupTaskComponent } from './components/edit-popup-task/edit-popup-task.component';
+import { DeletePopupTaskComponent } from './components/delete-popup-task/delete-popup-task.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { UniversalToolbarContainerComponent } from './page-components/universal-
     ProfileCardComponent,
     UniversalToolbarComponent,
     UniversalToolbarContainerComponent,
+    EditPopupTaskComponent,
+    DeletePopupTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,10 +60,11 @@ import { UniversalToolbarContainerComponent } from './page-components/universal-
     MatDialogModule,
     HttpClientModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ],
   providers: [StateService, HttpCallService, SidebarComponent],
-  entryComponents: [AddPopupTaskComponent],
+  entryComponents: [AddPopupTaskComponent, EditPopupTaskComponent, DeletePopupTaskComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
