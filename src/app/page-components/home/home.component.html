@@ -3,7 +3,7 @@
         <app-add-popup-task></app-add-popup-task>
     </div>
     <div class="row">
-        <div class="notes-panel d-inline col-xl-6">
+        <div class="notes-panel d-inline col-xl-5">
             <mat-list>
                 <h3 mat-subheader>Notes</h3>
                 <ul class="list-group list-group-vertical-lg">
@@ -29,7 +29,7 @@
                             <mat-icon class="note-icon col-xl-2" mat-list-icon>note</mat-icon>
                             <label class="d-inline col-xl-9">{{task.value}}</label>
                             <mat-icon class="edit-icon d-inline col-xl-1" (click)="EditEntity(task)" mat-list-icon matTooltip="Edit Task">edit</mat-icon>
-                            <mat-icon class="delete-icon d-inline col-xl-1"  (click)="DeleteEntity(note)" mat-list-icon matTooltip="Edit Task">delete_forever</mat-icon>
+                            <mat-icon class="delete-icon d-inline col-xl-1"  (click)="DeleteEntity(task)" mat-list-icon matTooltip="Edit Task">delete_forever</mat-icon>
                             <p mat-line> {{task.created_at | date}}</p>
                         </li>         
                     </mat-list-item>

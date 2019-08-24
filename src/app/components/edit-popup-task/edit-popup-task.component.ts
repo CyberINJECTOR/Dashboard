@@ -6,6 +6,7 @@ import { Tasks } from 'src/app/page-components/home/Entities/Task-model';
 import { HttpCallService } from 'src/app/services/http-call.service';
 import { EntityBase } from 'src/app/page-components/home/Entities/Entity-base';
 import { Accion } from 'src/app/page-components/home/Entities/Accion-enum';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-popup-task',
@@ -21,19 +22,15 @@ export class EditPopupTaskComponent implements OnInit {
   textArea: string;
   closeEditPopUp: EventEmitter<boolean> = new EventEmitter<boolean>();
   EntitytoSend: EventEmitter<EntityBase> = new EventEmitter<EntityBase>();
+  showErrorMessage: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public entityToEdit: EntityBase,
-              private taskService: TaskService,
-              private http: HttpCallService) {
-
+    private taskService: TaskService,
+    private http: HttpCallService) {
   }
 
   ngOnInit() {
-    // Get the task to update
-    this.taskService.getObservableValue().subscribe((entityUpdated: EntityBase) => {
-      this.newEntityToEdit = entityUpdated;
-      console.log(entityUpdated + ' Entity Updated from Behavior Subject ');
-    });
+    this.newEntityToEdit = this.entityToEdit;
     const entityToUpdate = new EntityToInsert(this.newEntityToEdit);
     // Set the text input with the current value
     this.textArea = entityToUpdate.value;
@@ -53,13 +50,19 @@ export class EditPopupTaskComponent implements OnInit {
   }
 
   EditEntity(newEntityToUpdate: EntityBase) {
-    this.newEntityToSave = this.newEntityToEdit;
-    this.newEntityToSave.value = this.textArea;
-    newEntityToUpdate.accion = Accion.Update;
-    this.http.update('update' + newEntityToUpdate.entity, newEntityToUpdate);
-    this.taskService.UpdateTaskOrNote(this.newEntityToSave);
-    this.closeEditPopUp.emit(true);
-    this.EntitytoSend.emit(this.newEntityToSave);
+    // tslint:disable-next-line: no-conditional-assignment
+    if (this.textArea !== '') {
+      this.newEntityToSave = this.newEntityToEdit;
+      this.newEntityToSave.value = this.textArea;
+      newEntityToUpdate.accion = Accion.Update;
+      this.http.update('update' + newEntityToUpdate.entity, newEntityToUpdate);
+      this.taskService.UpdateTaskOrNote(this.newEntityToSave);
+      this.closeEditPopUp.emit(true);
+      this.EntitytoSend.emit(this.newEntityToSave);
+    } else {
+      this.showErrorMessage = true;
+    }
+
   }
 
   ClosePopUp() {

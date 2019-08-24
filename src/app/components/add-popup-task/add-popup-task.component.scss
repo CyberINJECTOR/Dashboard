@@ -3,13 +3,20 @@
     label {
         padding-left: 1rem;
     }
-
-    .option-selector {
-        .note {
-            margin-left: 1rem;
+        .option-selector {
+            border: 1px solid red;
+            .task {
+                border: 1px solid red;
+                width: 2rem;
+            }
+            .note {
+                margin-left: 1rem;
+                width: 2rem;
+                border: 1px solid red;
+            }
         }
-    }
-
+    
+   
     .example-full-width {
         top:1rem;
     }
@@ -20,9 +27,6 @@
 
      .cancel-button, .add-button {
         margin:0 auto;
-        color: grey;
-        border:2px solid #D500F9;
-        background: transparent;
         float: right;
         top: 0.5rem;
         &:hover {
@@ -30,6 +34,17 @@
         }
     }
 }
+
+.example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
 
 
 

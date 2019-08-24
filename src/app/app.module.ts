@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule, MatToolbarModule, MatIconModule, MatButtonModule, MatDialogModule,
          MatMenuModule, MatListModule, MatExpansionModule, MatInputModule, MatCheckboxModule, MatTooltipModule,
-         MatChipsModule, MatTableModule } from '@angular/material';
+         MatChipsModule, MatTableModule, MatSnackBarModule, MatRadioModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,9 +18,10 @@ import { AddPopupTaskComponent } from './components/add-popup-task/add-popup-tas
 import { EditProfileComponent } from './page-components/profile/edit-profile/edit-profile.component';
 import { ProfileCardComponent } from './page-components/profile/profile-card/profile-card.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UniversalToolbarComponent } from './page-components/universal-toolbar/universal-toolbar.component'
+import { UniversalToolbarComponent } from './page-components/universal-toolbar/universal-toolbar.component';
 import { StateService } from './services/state.service';
 import { HttpCallService } from './services/http-call.service';
+// tslint:disable-next-line: max-line-length
 import { UniversalToolbarContainerComponent } from './page-components/universal-toolbar/universal-toolbar-container/universal-toolbar-container.component';
 import { EditPopupTaskComponent } from './components/edit-popup-task/edit-popup-task.component';
 import { DeletePopupTaskComponent } from './components/delete-popup-task/delete-popup-task.component';
@@ -61,7 +62,10 @@ import { DeletePopupTaskComponent } from './components/delete-popup-task/delete-
     HttpClientModule,
     MatTableModule,
     FormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule,
+    ReactiveFormsModule,
+    MatRadioModule
   ],
   providers: [StateService, HttpCallService, SidebarComponent],
   entryComponents: [AddPopupTaskComponent, EditPopupTaskComponent, DeletePopupTaskComponent],

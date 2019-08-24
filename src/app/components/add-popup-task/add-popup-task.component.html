@@ -1,9 +1,11 @@
 <div class="example-container">
   <label for=""> Add Task & Note</label><br />
-  <div class="option-selector col-xl-12">
-    <mat-checkbox class="task d-inline" (click)="selectvalue('Task')">Task</mat-checkbox>
-    <mat-checkbox class="note d-inline" (click)="selectvalue('Note')">Note</mat-checkbox>
-  </div>
+  <section class="example-section">
+      <mat-radio-group [(ngModel)]="labelPosition">
+        <mat-radio-button class="example-margin" value="after" (click)="selectvalue('Task')">Task</mat-radio-button>
+        <mat-radio-button class="example-margin" value="before" (click)="selectvalue('Note')">Note</mat-radio-button>
+      </mat-radio-group>
+  </section>
 
   <mat-form-field class="example-full-width col-xl-12">
     <textarea matInput 
@@ -14,6 +16,7 @@
               [(ngModel)]="textArea">
     </textarea>
   </mat-form-field>
+  <label style="color:red" *ngIf="showErrorMessage" for=""> This field can not be blanck </label><br />
   <br/>
   <button mat-button class="add-button" (click)="AddEntity(selectedValue)">Add</button>
   <button mat-button class="cancel-button" (click)="ClosePopUp()" >Cancel</button>

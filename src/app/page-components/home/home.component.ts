@@ -55,17 +55,15 @@ export class HomeComponent implements OnInit {
   EditEntity(entityToEdit: EntityBase) {
     const dialogRef = this.dialog.open(EditPopupTaskComponent, {
       width: '500px',
+      data: entityToEdit,
     });
 
-    this.taskService.UpdateTaskOrNote(entityToEdit);
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
 
     dialogRef.componentInstance.closeEditPopUp.subscribe(() => {
       this.dialog.closeAll();
-      // this.sortTaskArray(this.taskArrayList);
-      // this.sortNoteArray(this.noteArrayList);
     });
 
     dialogRef.componentInstance.EntitytoSend.subscribe((entity: EntityBaseRequest) => {
@@ -78,9 +76,9 @@ export class HomeComponent implements OnInit {
   DeleteEntity(entityToDelete: EntityBase) {
     const dialogRef = this.dialog.open(DeletePopupTaskComponent, {
       width: '500px',
+      data: entityToDelete,
     });
 
-    this.taskService.DeleteTaskOrNote(entityToDelete);
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });

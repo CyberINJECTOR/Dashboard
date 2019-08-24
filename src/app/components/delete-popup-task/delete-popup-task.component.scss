@@ -1,0 +1,8 @@
+.cancel-button, .delete-button {
+    margin:0 auto;
+    float: right;
+    top: 0.5rem;
+    &:hover {
+        background: white;
+    }
+}

@@ -3,6 +3,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { HttpCallService } from 'src/app/services/http-call.service';
 import { EntityBase } from 'src/app/page-components/home/Entities/Entity-base';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { Accion } from 'src/app/page-components/home/Entities/Accion-enum';
 
 
 @Component({
@@ -16,23 +17,24 @@ export class DeletePopupTaskComponent implements OnInit {
   closeDeletePopUp: EventEmitter<boolean> = new EventEmitter<boolean>();
   EntitytoSend: EventEmitter<EntityBase> = new EventEmitter<EntityBase>();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public entityToEdit: EntityBase,
+  constructor(@Inject(MAT_DIALOG_DATA) public entityToDelete: EntityBase,
               private taskService: TaskService,
-              private http: HttpCallService) { }
+              private http: HttpCallService) {
+  }
 
   ngOnInit() {
-    this.taskService.getObservableValue().subscribe((entityUpdated: EntityBase) => {
-      this.newEntityToDelete = entityUpdated;
-      // this.newEntityToEdit = entityUpdated;
-      console.log(entityUpdated + ' Entity Updated from Behavior Subject ');
-    });
+    this.newEntityToDelete = this.entityToDelete;
   }
 
   DeleteEntity(entityToDelete: EntityBase) {
+    entityToDelete.accion = Accion.Delete;
     this.http.delete('delete' + entityToDelete.entity, entityToDelete);
     this.taskService.DeleteTaskOrNote(entityToDelete);
     this.closeDeletePopUp.emit(true);
     this.EntitytoSend.emit(entityToDelete);
   }
 
+  ClosePopUp() {
+    this.closeDeletePopUp.emit(true);
+  }
 }

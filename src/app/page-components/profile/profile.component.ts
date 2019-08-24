@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { StateService } from 'src/app/services/state.service';
+import { HttpCallService } from 'src/app/services/http-call.service';
+import { User } from './UserEntity/user-model';
 
 @Component({
   selector: 'app-profile',
@@ -8,10 +10,10 @@ import { StateService } from 'src/app/services/state.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit() {
-
   }
 
 }
