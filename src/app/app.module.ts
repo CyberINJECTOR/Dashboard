@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { MatFormFieldModule, MatToolbarModule, MatIconModule, MatButtonModule, MatDialogModule,
-         MatMenuModule, MatListModule, MatExpansionModule, MatInputModule, MatCheckboxModule, MatTooltipModule,
-         MatChipsModule, MatTableModule, MatSnackBarModule, MatRadioModule } from '@angular/material';
+import {
+  MatFormFieldModule, MatToolbarModule, MatIconModule, MatButtonModule, MatDialogModule,
+  MatMenuModule, MatListModule, MatExpansionModule, MatInputModule, MatCheckboxModule, MatTooltipModule,
+  MatChipsModule, MatTableModule, MatSnackBarModule, MatRadioModule, MatPaginatorModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +27,13 @@ import { HttpCallService } from './services/http-call.service';
 import { UniversalToolbarContainerComponent } from './page-components/universal-toolbar/universal-toolbar-container/universal-toolbar-container.component';
 import { EditPopupTaskComponent } from './components/edit-popup-task/edit-popup-task.component';
 import { DeletePopupTaskComponent } from './components/delete-popup-task/delete-popup-task.component';
+import { ReduxService } from './services/redux-service.service';
+import { EventTileComponent } from './page-components/dashboard/event-tile/event-tile.component';
+import { ImageTileComponent } from './page-components/dashboard/image-tile/image-tile.component';
+import { TaskTileComponent } from './page-components/dashboard/task-tile/task-tile.component';
+import { NoteTileComponent } from './page-components/dashboard/note-tile/note-tile.component';
+import { GridComponent } from './components/grid/grid.component';
+import { FindActionComponent } from './components/find-action/find-action.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +52,12 @@ import { DeletePopupTaskComponent } from './components/delete-popup-task/delete-
     UniversalToolbarContainerComponent,
     EditPopupTaskComponent,
     DeletePopupTaskComponent,
+    EventTileComponent,
+    ImageTileComponent,
+    TaskTileComponent,
+    NoteTileComponent,
+    GridComponent,
+    FindActionComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,9 +80,10 @@ import { DeletePopupTaskComponent } from './components/delete-popup-task/delete-
     MatTooltipModule,
     MatSnackBarModule,
     ReactiveFormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatPaginatorModule
   ],
-  providers: [StateService, HttpCallService, SidebarComponent],
+  providers: [StateService, HttpCallService, SidebarComponent, ReduxService],
   entryComponents: [AddPopupTaskComponent, EditPopupTaskComponent, DeletePopupTaskComponent],
   bootstrap: [AppComponent]
 })

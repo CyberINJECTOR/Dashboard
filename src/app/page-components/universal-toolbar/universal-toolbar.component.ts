@@ -9,16 +9,15 @@ import { ProxyBaseComponent } from '../proxy-base.component';
   templateUrl: './universal-toolbar.component.html',
   styleUrls: ['./universal-toolbar.component.scss']
 })
-export class UniversalToolbarComponent extends ProxyBaseComponent implements OnInit {
+export class UniversalToolbarComponent implements OnInit {
   selectedTab: string;
   addNotesAndTask: boolean;
   // @Output() tabSelected: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private stateService: StateService, private sideBarComponent: SidebarComponent) {
-    super(stateService);
   }
   ngOnInit() {
-    this.selectedTab = this.stateService.getItem(LocalStorageVariables.selectedTab);
+    this.selectedTab = this.stateService.getValue(LocalStorageVariables.selectedTab);
     this.stateService.getObservableValue(LocalStorageVariables.selectedTab).subscribe((tab: any) => {
       if (tab != null) {
         this.selectedTab = tab;

@@ -3,6 +3,7 @@ import { EntityBase } from './page-components/home/Entities/Entity-base';
 import { HttpCallService } from './services/http-call.service';
 import { MatSnackBar } from '@angular/material';
 import { Accion } from './page-components/home/Entities/Accion-enum';
+import { ReduxService } from './services/redux-service.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,9 @@ export class AppComponent implements OnInit {
   sideBarIsOpened = false;
   showAlert: boolean;
   durationInSeconds = 5;
-  constructor(private httpService: HttpCallService, private snackBar: MatSnackBar) {
+  constructor(private httpService: HttpCallService,
+              private snackBar: MatSnackBar,
+              private redux: ReduxService) {
   }
 
   ngOnInit() {
@@ -38,8 +41,21 @@ export class AppComponent implements OnInit {
           break;
         }
       }
-
     });
+
+    this.redux.getObservableValue().subscribe((result: any) => {
+      switch (result.label) {
+        case (Accion.updateUser): {
+          this.snackBar.open( result.value.name + ' Updated Succesfully', result.label + ' OK', {
+            duration: 4000,
+          });
+          break;
+        }
+      }
+    });
+
+
+    
   }
 
   openSnackBar() {

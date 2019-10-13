@@ -4,6 +4,8 @@ import { HttpCallService } from 'src/app/services/http-call.service';
 import { EntityBase } from 'src/app/page-components/home/Entities/Entity-base';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Accion } from 'src/app/page-components/home/Entities/Accion-enum';
+import { ReduxService } from 'src/app/services/redux-service.service';
+import { ReduxVariables } from 'src/app/models/redux';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class DeletePopupTaskComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public entityToDelete: EntityBase,
               private taskService: TaskService,
-              private http: HttpCallService) {
+              private http: HttpCallService,
+              private redux: ReduxService) {
   }
 
   ngOnInit() {
@@ -30,8 +33,9 @@ export class DeletePopupTaskComponent implements OnInit {
     entityToDelete.accion = Accion.Delete;
     this.http.delete('delete' + entityToDelete.entity, entityToDelete);
     this.taskService.DeleteTaskOrNote(entityToDelete);
+    this.redux.deleteItemToStoreRedux(entityToDelete);
     this.closeDeletePopUp.emit(true);
-    this.EntitytoSend.emit(entityToDelete);
+    // this.EntitytoSend.emit(entityToDelete);
   }
 
   ClosePopUp() {

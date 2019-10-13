@@ -1,0 +1,61 @@
+.tile {
+    height: 8rem;
+    margin: 4rem 4rem;
+    background-color: #202940;
+    border-radius: 4px 4px 4px 4px;
+    .row {
+        .img-tile {
+            height: 4rem;
+            position: absolute;
+            top: -1rem;
+            background: orange;
+            border-radius: 4px 4px 4px 4px;
+            left: 0.5rem;
+            i {
+                margin-top: 1rem;
+                margin-left: 0.8rem;
+                color: white;
+            }
+        }
+
+        .description-tile {
+            height: 4rem;
+            right: 0;
+            position: absolute;
+            .description {
+                height: 2rem;
+                label {
+                    color: #8b92a9;
+                }
+            }
+            .amount {
+                height: 2rem;
+                label {
+                    color: #606477;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+
+    .row {
+        .footer-tile {
+            height: 3rem;
+            border: none;
+            position: absolute;
+            border-top: 1px solid #606477;
+            bottom: 0;
+            i {
+                margin-top: 1rem;
+                color: #EC6D0E;
+                font-size: 1rem;
+            }
+
+            label {
+                margin-left: 0.5rem;
+                color: #EC6D0E;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}

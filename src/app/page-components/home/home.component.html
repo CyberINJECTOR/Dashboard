@@ -4,7 +4,7 @@
     </div>
     <div class="row">
         <div class="notes-panel d-inline col-xl-5">
-            <mat-list>
+            <mat-list style="overflow-y:scroll;">
                 <h3 mat-subheader>Notes</h3>
                 <ul class="list-group list-group-vertical-lg">
                   <mat-list-item class="body-notes" *ngFor="let note of noteArrayList">
@@ -13,14 +13,14 @@
                           <label class="d-inline col-xl-9">{{note.value}}</label>
                           <mat-icon class="edit-icon d-inline col-xl-1" (click)="EditEntity(note)" mat-list-icon matTooltip="Edit Note">edit</mat-icon>
                           <mat-icon class="delete-icon d-inline col-xl-1"  (click)="DeleteEntity(note)"  matTooltip="Delete Note" mat-list-icon>delete_forever</mat-icon>
-                          <p mat-line> {{note.created_at | date}}</p>
-                      </li>         
+                          <p mat-line> {{note.created_ad | date}}</p>
+                      </li>
                   </mat-list-item>
               </ul>
             </mat-list>
         </div>
         <div class="task-panel d-inline col-xl-5">
-            <mat-list>
+            <mat-list style="overflow-y:scroll;">
                 <mat-divider></mat-divider>
                 <h3 mat-subheader>Task</h3>
                 <ul class="list-group list-group-vertical-lg">
@@ -30,8 +30,8 @@
                             <label class="d-inline col-xl-9">{{task.value}}</label>
                             <mat-icon class="edit-icon d-inline col-xl-1" (click)="EditEntity(task)" mat-list-icon matTooltip="Edit Task">edit</mat-icon>
                             <mat-icon class="delete-icon d-inline col-xl-1"  (click)="DeleteEntity(task)" mat-list-icon matTooltip="Edit Task">delete_forever</mat-icon>
-                            <p mat-line> {{task.created_at | date}}</p>
-                        </li>         
+                            <p mat-line> {{task.created_ad | date}}</p>
+                        </li>
                     </mat-list-item>
                 </ul>
             </mat-list>

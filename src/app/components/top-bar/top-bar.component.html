@@ -1,11 +1,13 @@
 <div class="row">
-  <div class="open-side-bar col-xl-3">
-    <button mat-icon-button aria-label="Example icon-button with a menu">
-      <mat-icon class="three-thods">more_vert</mat-icon>
-    </button>
+  <div class="open-side-bar">
+    <mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
+      <mat-chip color="accent" selected>
+        {{selectedTab}}
+      </mat-chip>
+    </mat-chip-list>
   </div>
 
-  <ul class="list-group list-group-horizontal-lg col-xl-3  offset-xl-6">
+  <ul class="list-group list-group-horizontal-lg col-xl-3  offset-xl-7">
     <li class="list-group-item">
       <button mat-menu-item [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon class="notification-button">notification_important</mat-icon>
@@ -30,7 +32,7 @@
     </li>
     <li class="list-group-item">
       <mat-icon class="perfil-icon">
-        <img matListAvatar src="../../../assets/img/perfil2.jpg" alt="...">
+        <img matListAvatar src="http://127.0.0.1:8000/storage/User/{{urlUser}}" alt="...">
       </mat-icon>
     </li>
   </ul>

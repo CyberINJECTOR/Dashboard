@@ -1,0 +1,52 @@
+.find-element-panel {
+  margin-top: 15%;
+  margin-left: 1rem;
+  background: #202940;
+  border-radius: 5px 5px 5px 5px;
+  padding-bottom: 3rem;
+  height: 10rem;
+  h3 {
+      margin-top: -3rem;
+      width: 100%;
+      background: #D500F9;
+      color: white;
+      height: 3rem;
+      border-radius: 5px 5px 5px 5px;
+  }
+
+  .body-notes {
+      .list-group-item {
+          border-radius: 5px 5px 5px 5px;
+          background: transparent;
+          opacity: 0.9;
+          margin-top: 3rem;
+          .form-group {
+              margin-top: 4.5rem;
+              .note-icon  {
+                  color: #D500F9;
+                  cursor: pointer;
+                  background: transparent;
+              }
+              button {
+                color: #D500F9;
+                border:1px solid rgba(255, 255, 255, 0.459);
+                float: right;
+              }
+          }
+      }
+  }
+}
+
+mat-placeholder {
+  color: #D500F9;
+}
+
+input {
+  color: rgba(255, 255, 255, 0.459);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}

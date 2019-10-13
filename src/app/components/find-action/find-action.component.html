@@ -1,0 +1,27 @@
+<div class="find-element-panel col-xl-10" *ngIf="isFindPanelVisible">
+  <mat-list>
+      <!-- <mat-icon class="d-inline note-icon col-xl-1" mat-list-icon>find_in_page</mat-icon> -->
+    <h3 mat-subheader>Find an Event</h3>
+    <ul class="list-group">
+      <mat-list-item class="body-notes">
+        <li class="list-group-item col-xl-12">
+          <form class="example-container" [formGroup]="options" (ngSubmit)="onSubmit(options)" autocomplete="off">
+            <div class="form-group">
+              <mat-form-field class="d-inline" [color]="options.value.color">
+                <input class="d-inline col-xl-6" matInput type="number" formControlName="fontSize" min="0">
+                <mat-placeholder>Find</mat-placeholder>
+                <mat-error *ngIf="options.get('fontSize')?.invalid ||
+                options.get('fontSize')?.pristine ||
+                options.get('fontSize')?.dirty ||
+                options.get('fontSize')?.untouched ">
+                  This field sould not be empty
+                </mat-error>
+              </mat-form-field>
+              <button mat-button class="d-inline Find col-xl-4" (click)="getArrayImgByEventId(options)">Find</button>
+            </div>
+          </form>
+        </li>
+      </mat-list-item>
+    </ul>
+  </mat-list>
+</div>

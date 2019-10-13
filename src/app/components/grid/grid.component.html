@@ -1,0 +1,95 @@
+<div class="example-container mat-elevation-z8">
+  <!-- <table class="col-xl-11" mat-table [dataSource]="dataSource"> -->
+  <table class="event-table col-xl-11" mat-table [dataSource]="arrayList" multiTemplateDataRows>
+
+    <div class="column-style-header" matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef class="columns-style-header"></th>expand_more
+      <td mat-cell *matCellDef="let iconEdit" class="columns-contain-icon-expand">
+        <mat-icon class="icon">expand_more</mat-icon>
+      </td>
+    </div>
+    <ng-container matColumnDef="expandedDetail">
+      <div class="row">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="7">
+          <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="col-xl-12 example-element-container">
+                <div class="col-xl-4 d-inline img-container">
+                  <img mat-card-image src="http://127.0.0.1:8000/storage/{{entity}}/{{element.img_url}}"
+                    class="col-xl-12 detail-img" alt="Photo of a Shiba Inu" #firstMessage>
+                  <button mat-button class="update-picture">Update Picture</button>
+                </div>
+
+                <div class="col-xl-4 d-inline form-container">
+                  <mat-list class="profile-panel col-xl-12">
+                    <h3 mat-subheader style="color: #8b92a9">Edit Profile</h3>
+                    <!-- <form [formGroup]="formGroup"> -->
+                    <div class="form-input">
+                      <mat-form-field class="col-xl-10">
+                        <mat-placeholder>User Name</mat-placeholder>
+                        <input matInput class="input-color" value="{{element.description}}">
+                      </mat-form-field>
+                      <mat-form-field class="col-xl-10">
+                        <mat-placeholder>Mail</mat-placeholder>
+                        <input matInput class="input-color" value="{{element.id_EventType}}">
+                      </mat-form-field>
+                      <mat-form-field class="col-xl-10">
+                        <mat-placeholder>Mail</mat-placeholder>
+                        <input matInput class="input-color" value="{{element.created_ad}}">
+                      </mat-form-field>
+                      <button mat-button class="update-profile">Update Profile</button>
+                    </div>
+
+                  </mat-list>
+                </div>
+
+            </div>
+          </div>
+        </td>
+      </div>
+    </ng-container>
+
+    <div class="ng-container-img" matColumnDef="img_url">
+      <th mat-header-cell *matHeaderCellDef class="columns-style-header"> Image Url </th>
+      <!-- <td mat-cell *matCellDef="let eventsArrayList"> {{eventsArrayList.img_url}} </td> -->
+      <td *matCellDef="let arrayList" class="columns-contain"><img mat-card-image class="img-table"
+          src="http://127.0.0.1:8000/storage/{{entity}}/{{arrayList.img_url}}" alt="Photo of a Shiba Inu"></td>
+      <!-- <td mat-cell *matCellDef="let eventsArrayList">  </td> -->
+    </div>
+
+    <div class="column-style-header" matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef class="columns-style-header"> Description </th>
+      <td mat-cell *matCellDef="let arrayList" class="columns-contain"> {{arrayList.description}} </td>
+    </div>
+
+    <div class="column-style-header" matColumnDef="id_EventType">
+      <th mat-header-cell *matHeaderCellDef class="columns-style-header"> IdEventType </th>
+      <td mat-cell *matCellDef="let arrayList" class="columns-contain"> {{arrayList.id_EventType}} </td>
+    </div>
+
+    <div class="column-style-header" matColumnDef="created_ad">
+      <th mat-header-cell *matHeaderCellDef class="columns-style-header"> Create Date </th>
+      <td mat-cell *matCellDef="let arrayList" class="columns-contain"> {{arrayList.created_ad}} </td>
+    </div>
+
+    <div class="column-style-header" matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef class="columns-style-header"> edit </th>
+      <td mat-cell *matCellDef="let iconEdit" class="columns-contain-icon">
+        <mat-icon class="icon">edit</mat-icon>
+      </td>
+    </div>
+
+    <div class="column-style-header" matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef class="columns-style-header"> delete </th>
+      <td mat-cell *matCellDef="let iconDelete" class="columns-contain-icon">
+        <mat-icon class="icon">delete</mat-icon>
+      </td>
+    </div>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === row"
+      (click)="expandedElement = expandedElement === row ? null : row">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+</div>

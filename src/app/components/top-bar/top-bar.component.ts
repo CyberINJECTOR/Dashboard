@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AddPopupTaskComponent } from '../add-popup-task/add-popup-task.component';
+import { StateService } from 'src/app/services/state.service';
+import { LocalStorageVariables } from 'src/app/models/local-storage';
+import { ReduxVariables } from 'src/app/models/redux';
+import { User } from 'src/app/page-components/profile/UserEntity/user-model';
 
 @Component({
   selector: 'app-top-bar',
@@ -8,10 +12,23 @@ import { AddPopupTaskComponent } from '../add-popup-task/add-popup-task.componen
   styleUrls: ['./top-bar.component.scss']
 })
 export class TopBarComponent implements OnInit {
-
-  constructor(public dialog: MatDialog) {}
+  selectedTab: string;
+  user: User;
+  urlUser: string;
+  constructor(public dialog: MatDialog, private stateService: StateService) { }
 
   ngOnInit() {
+    this.selectedTab = this.stateService.getValue<string>(ReduxVariables.selectedTab);
+    this.stateService.getObservableValue<string>(ReduxVariables.selectedTab).subscribe((tab: any) => {
+      if (tab != null) {
+        this.selectedTab = tab;
+      }
+    });
+
+    this.stateService.getObservableValue<User>(ReduxVariables.updateUser).subscribe(user => {
+      this.user = new User(user);
+      this.urlUser = this.user.urlImg;
+    });
   }
 
   openDialog(): void {

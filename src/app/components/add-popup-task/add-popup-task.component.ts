@@ -2,10 +2,11 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { HttpCallService } from 'src/app/services/http-call.service';
 import { TaskService } from 'src/app/services/task.service';
 import { ModelUtils } from 'src/app/models/Model-utils';
-import { EntityBase } from 'src/app/page-components/home/Entities/Entity-base';
 import { EntityBaseRequest } from 'src/app/page-components/home/Entities/EntityBaseRequest';
 import { Accion } from 'src/app/page-components/home/Entities/Accion-enum';
 import { Entity } from 'src/app/page-components/home/Entities/Entity-enum';
+import { ReduxService } from 'src/app/services/redux-service.service';
+import { ReduxVariables } from 'src/app/models/redux';
 
 @Component({
   selector: 'app-add-popup-task',
@@ -22,7 +23,7 @@ export class AddPopupTaskComponent implements OnInit {
   labelPosition = 'after';
   task: boolean;
   note: boolean;
-  constructor(private httpService: HttpCallService, private taskService: TaskService) { }
+  constructor(private httpService: HttpCallService, private taskService: TaskService, private redux: ReduxService) { }
 
   ngOnInit() {
   }
@@ -33,7 +34,7 @@ export class AddPopupTaskComponent implements OnInit {
 
   AddEntity(selectedValue: string) {
 
-    if (this.textArea !== undefined && this.selectedValue !== undefined ) {
+    if (this.textArea !== undefined && this.selectedValue !== undefined) {
       const request = new EntityBaseRequest();
       request.entity = selectedValue;
       request.value = this.textArea;
@@ -43,7 +44,8 @@ export class AddPopupTaskComponent implements OnInit {
 
       this.httpService.insert('insert' + request.entity, request);
       this.taskService.addTaskOrNote(request);
-      this.newEntitySaved.emit(request);
+      this.redux.addItemToStoreRedux(ReduxVariables.event, request);
+      // this.newEntitySaved.emit(request);
       this.closeAddPopUp.emit(true);
       this.showErrorMessage = true;
       this.showCheckboxError = true;

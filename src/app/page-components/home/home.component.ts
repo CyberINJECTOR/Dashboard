@@ -11,6 +11,12 @@ import { Accion } from './Entities/Accion-enum';
 import { Entity } from './Entities/Entity-enum';
 import { EntityBaseRequest } from './Entities/EntityBaseRequest';
 import { ModelUtils } from 'src/app/models/Model-utils';
+import { ReduxService } from 'src/app/services/redux-service.service';
+import { ReduxVariables } from 'src/app/models/redux';
+import { eAction } from 'src/app/services/redux/reducer';
+import { StateService } from 'src/app/services/state.service';
+import { ProxyBaseComponent } from '../proxy-base.component';
+import { Page } from '../entity/page';
 
 export interface Section {
   name: string;
@@ -22,15 +28,21 @@ export interface Section {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends ProxyBaseComponent implements OnInit {
   taskArrayList: Tasks[];
+  protected readonly tab = Page.task;
   noteArrayList: Notes[];
   sortTaskArrayList: Tasks[];
   sortNoteArrayList: Notes[];
-  newEntityToSave: EntityBase;
+  newEntityRedux: any;
   newEntity: EventEmitter<EntityBase> = new EventEmitter<EntityBase>();
 
-  constructor(private httpCall: HttpCallService, private taskService: TaskService, private dialog: MatDialog) {
+  constructor(private httpCall: HttpCallService,
+    private taskService: TaskService,
+    stateService: StateService,
+    private dialog: MatDialog,
+    private redux: ReduxService) {
+    super(httpCall, stateService);
     this.httpCall.getAllEvents('getAllTasks').subscribe((res: Tasks[]) => {
       this.taskArrayList = res;
     });
@@ -41,15 +53,42 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initialize();
     // We heart the task service to push in the array
-    this.taskService.getObservableValue().subscribe((entitySaved: EntityBase) => {
-      this.newEntityToSave = entitySaved;
-
-      if (this.newEntityToSave.accion === Accion.Save) {
-        (entitySaved.entity === Entity.Task) ? this.taskArrayList.push(entitySaved) : this.noteArrayList.push(entitySaved);
-        console.log(entitySaved + ' Entity saved from Behavior Subject ');
+    const value = this.redux.getValue(ReduxVariables.event);
+    this.redux.getObservableValue().subscribe((reduxEntityValue: any) => {
+      this.newEntityRedux = reduxEntityValue;
+      const isTask = (reduxEntityValue.value.entity === Entity.Task);
+      switch (reduxEntityValue.value.accion) {
+        case (Accion.Save): {
+          (isTask) ? this.taskArrayList.push(reduxEntityValue.value) : this.noteArrayList.push(reduxEntityValue.value);
+          break;
+        }
+        case (Accion.Update): {
+          (isTask) ? this.sortTaskArrayList = this.taskArrayList : this.sortNoteArrayList = this.noteArrayList;
+          this.SortEntityArray(Accion.Update);
+          break;
+        }
+        case (Accion.Delete): {
+          (isTask) ? this.sortTaskArrayList = this.taskArrayList : this.sortNoteArrayList = this.noteArrayList;
+          this.SortEntityArray(Accion.Delete);
+          break;
+        }
       }
     });
+  }
+
+  private SortEntityArray(accion: string) {
+    let id = this.newEntityRedux.value.id;
+    if (this.sortTaskArrayList !== undefined) {
+      const entityToReplace = this.sortTaskArrayList.find(x => x.id === id);
+      const startValue = this.sortTaskArrayList.indexOf(entityToReplace);
+      ModelUtils.SortArray(this.sortTaskArrayList, startValue, 1, this.newEntityRedux.value, accion);
+    } else {
+      const entityToReplace = this.sortNoteArrayList.find(x => x.id === id);
+      const startValue = this.sortNoteArrayList.indexOf(entityToReplace);
+      ModelUtils.SortArray(this.sortNoteArrayList, startValue, 1, this.newEntityRedux.value, accion);
+    }
   }
 
   EditEntity(entityToEdit: EntityBase) {
@@ -58,19 +97,15 @@ export class HomeComponent implements OnInit {
       data: entityToEdit,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
-
     dialogRef.componentInstance.closeEditPopUp.subscribe(() => {
       this.dialog.closeAll();
     });
 
-    dialogRef.componentInstance.EntitytoSend.subscribe((entity: EntityBaseRequest) => {
-      // tslint:disable-next-line: max-line-length
-      (entity.entity === Entity.Task) ? this.sortTaskArrayList = this.taskArrayList : this.sortNoteArrayList = this.noteArrayList;
-      this.SortEntityArray(Accion.Update);
-    });
+    // dialogRef.componentInstance.EntitytoSend.subscribe((entity: EntityBaseRequest) => {
+    //   // tslint:disable-next-line: max-line-length
+    //   (entity.entity === Entity.Task) ? this.sortTaskArrayList = this.taskArrayList : this.sortNoteArrayList = this.noteArrayList;
+    //   this.SortEntityArray(Accion.Update);
+    // });
   }
 
   DeleteEntity(entityToDelete: EntityBase) {
@@ -79,29 +114,14 @@ export class HomeComponent implements OnInit {
       data: entityToDelete,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    });
-
     dialogRef.componentInstance.closeDeletePopUp.subscribe(() => {
       this.dialog.closeAll();
     });
 
-    dialogRef.componentInstance.EntitytoSend.subscribe((entity: EntityBase) => {
-      (entity.entity === Entity.Task) ? this.sortTaskArrayList = this.taskArrayList : this.sortNoteArrayList = this.noteArrayList;
-      this.SortEntityArray(Accion.Delete);
-    });
+    // dialogRef.componentInstance.EntitytoSend.subscribe((entity: EntityBase) => {
+    //   (entity.entity === Entity.Task) ? this.sortTaskArrayList = this.taskArrayList : this.sortNoteArrayList = this.noteArrayList;
+    //   this.SortEntityArray(Accion.Delete);
+    // });
   }
 
-  private SortEntityArray(accion: string) {
-    if (this.sortTaskArrayList !== undefined) {
-      const entityToReplace = this.sortTaskArrayList.find(x => x.id === this.newEntityToSave.id);
-      const startValue = this.sortTaskArrayList.indexOf(entityToReplace);
-      ModelUtils.SortArray(this.sortTaskArrayList, startValue, 1, this.newEntityToSave, accion);
-    } else {
-      const entityToReplace = this.sortNoteArrayList.find(x => x.id === this.newEntityToSave.id);
-      const startValue = this.sortNoteArrayList.indexOf(entityToReplace);
-      ModelUtils.SortArray(this.sortNoteArrayList, startValue, 1, this.newEntityToSave, accion);
-    }
-  }
 }

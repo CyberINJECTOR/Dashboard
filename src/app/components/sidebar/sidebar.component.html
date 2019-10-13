@@ -13,29 +13,29 @@
         <mat-expansion-panel class="panel-container">
           <mat-expansion-panel-header>
             <mat-panel-title class="perfil">
-                <img matListAvatar src="../../../assets/img/perfil2.jpg" alt="...">
+                <img matListAvatar src="http://127.0.0.1:8000/storage/User/{{urlUser}}" alt="...">
             </mat-panel-title>
             <mat-panel-description class="name">
              name profile
             </mat-panel-description>
           </mat-expansion-panel-header>
-      
+
           <button mat-menu-item aria-label="Example icon-button with a menu">
               <mat-icon class="notification-button">account_box</mat-icon>
-              <label>My Profile</label> 
+              <label>My Profile</label>
           </button>
-             
+
           <button mat-menu-item aria-label="Example icon-button with a menu">
               <mat-icon class="notification-button">account_box</mat-icon>
               <label>Edit Profile</label>
-          </button>            
+          </button>
         </mat-expansion-panel>
     </mat-accordion>
 </div>
 <br/>
 <mat-divider></mat-divider>
 <div class="row">
-    <mat-list class="col-xl-12">    
+    <mat-list class="col-xl-12">
         <mat-list-item class="list-items" routerLink="/Task_and_Notes" (click)="navigate('Task_and_Notes')">
           <mat-icon mat-list-icon class="icon-menu md-18">home</mat-icon>
           <h4 mat-line>Task and Notes</h4>
@@ -58,3 +58,4 @@
         </mat-list-item>
     </mat-list>
 </div>
+<app-find-action></app-find-action>

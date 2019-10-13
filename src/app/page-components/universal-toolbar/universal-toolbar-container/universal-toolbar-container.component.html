@@ -13,7 +13,7 @@
       <mat-icon class="icon">delete</mat-icon>
       <label>Delete {{selectedTab}}</label>
     </button>
-    <button mat-button color="warn">
+    <button mat-button color="warn" (click)="openFindElementPanel()">
       <mat-icon class="icon">find_in_page</mat-icon>
       <label>Find {{selectedTab}}</label>
     </button>

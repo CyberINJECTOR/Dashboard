@@ -1,67 +1,54 @@
 <mat-list class="profile-panel col-xl-6">
     <h3 mat-subheader>Profile</h3>
-    <div class="input-container col-xl-12">
-        <div class="form-input d-inline">
-            <mat-form-field class="input col-xl-6">
-                <mat-placeholder>User Name</mat-placeholder>
-                <input matInput class="input-color" value="{{name}}">
-            </mat-form-field>
-            <mat-form-field class="col-xl-6">
-                <mat-placeholder>Mail</mat-placeholder>
-                <input matInput class="input-color" value="{{email}}">
-            </mat-form-field>
+    <form *ngIf="name || profileDescription || email || company || city" [formGroup]="formGroup"
+        (ngSubmit)="updateProfile(formGroup.value)">
+        <div class="input-container col-xl-12">
+            <div class="form-input d-inline">
+                <mat-form-field class="input col-xl-6">
+                    <mat-placeholder>User Name</mat-placeholder>
+                    <input formControlName="name" matInput class="input-color" value="{{name}}">
+                </mat-form-field>
+                <mat-form-field class="col-xl-6">
+                    <mat-placeholder>Mail</mat-placeholder>
+                    <input formControlName="email" matInput class="input-color" value="{{email}}">
+                </mat-form-field>
+            </div>
+            <div class="form-input d-inline">
+                <mat-form-field class="col-xl-12">
+                    <mat-placeholder>Profile Description</mat-placeholder>
+                    <textarea matInput class="input-color" value="{{profileDescription}}" cdkTextareaAutosize
+                        cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" formControlName="profileDescription"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="form-input d-inline">
+                <mat-form-field class="col-xl-6">
+                    <mat-placeholder>Company</mat-placeholder>
+                    <input formControlName="company" matInput class="input-color" value="{{company}}">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-placeholder>City</mat-placeholder>
+                    <input formControlName="city" matInput class="input-color" value="{{city}}">
+                </mat-form-field>
+            </div>
         </div>
-        <div class="form-input d-inline">
-            <mat-form-field class="col-xl-12">
-                <mat-placeholder>Profile Description</mat-placeholder>
-                <textarea matInput class="input-color" value="{{profileDescription}}" cdkTextareaAutosize
-                    cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
-            </mat-form-field>
-        </div>
-        <div class="form-input d-inline">
-            <mat-form-field class="col-xl-6">
-                <mat-placeholder>Company</mat-placeholder>
-                <input matInput class="input-color" value="{{company}}">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-placeholder>City</mat-placeholder>
-                <input matInput class="input-color" value="{{city}}">
-            </mat-form-field>
-        </div>
-    </div>
-    <button mat-button class="update-profile">Update Profile</button>
+        <button mat-button class="update-profile">Update Profile</button>
+    </form>
 </mat-list>
 
 <mat-list class="profile-panel-user col-xl-4">
-    <img mat-card-image src=".../../../../../assets/img/nacho.jpg" alt="Photo of a Shiba Inu"><br />
-    <div class="form-input d-inline">
-        <mat-form-field class="col-xl-12">
-            <input matInput class="input-color" disabled value="CEO / CO FOUNDER">
-        </mat-form-field>
-        <mat-form-field class="col-xl-12">
-            <input matInput class="input-color" disabled value="{{name}}">
-        </mat-form-field>
-        <label class="input-color">
-            {{profileDescription}}
-        </label>
-        <button matInput mat-flat-button class="follow">Follow</button>
-    </div>
-
-
-
-    <!-- <div class="form-input d-inline">
-        <mat-form-field class="col-xl-6">
-            <label matInput class="role">CEO / CO FOUNDER</label>
-        </mat-form-field>
-        <mat-form-field class="col-xl-6">
-            <mat-placeholder>{{name}}</mat-placeholder>
-            <label matInput class="name" value="{{name}}"></label>
-        </mat-form-field>
-        <mat-form-field class="col-xl-6">
-            <mat-placeholder>{{profileDescription}}</mat-placeholder>
-            <label matInput class="description" value="{{profileDescription}}"></label>
-        </mat-form-field>
-
-    </div> -->
-
+    <img mat-card-image src="http://127.0.0.1:8000/storage/User/{{urlImg}}" alt="Photo of a Shiba Inu"><br />
+    <form *ngIf="name || profileDescription || email || company || city" [formGroup]="formGroup">
+        <div class="form-input d-inline">
+            <mat-form-field class="col-xl-12">
+                <input matInput class="input-color" disabled value="{{formGroup.value.company}}">
+            </mat-form-field>
+            <mat-form-field class="col-xl-12">
+                <input matInput class="input-color" disabled value="{{formGroup.value.name}}">
+            </mat-form-field>
+            <label class="input-color">
+                {{formGroup.value.profileDescription}}
+            </label>
+            <button matInput mat-flat-button class="follow">Follow</button>
+        </div>
+    </form>
 </mat-list>

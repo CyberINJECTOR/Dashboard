@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AddPopupTaskComponent } from 'src/app/components/add-popup-task/add-popup-task.component';
+import { StateService } from 'src/app/services/state.service';
+import { ReduxVariables } from 'src/app/models/redux';
 
 @Component({
   selector: 'app-universal-toolbar-container',
@@ -10,7 +12,7 @@ import { AddPopupTaskComponent } from 'src/app/components/add-popup-task/add-pop
 export class UniversalToolbarContainerComponent implements OnInit {
   @Input() selectedTab: string;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private stateService: StateService) { }
 
   ngOnInit() {
   }
@@ -31,6 +33,10 @@ export class UniversalToolbarContainerComponent implements OnInit {
     dialogRef.componentInstance.newEntitySaved.subscribe((result) => {
       console.log(result);
     });
+  }
+
+  openFindElementPanel() {
+    this.stateService.addItem(ReduxVariables.showFindPanel, true);
   }
 
 }
